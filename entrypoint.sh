@@ -24,7 +24,7 @@ git config --global --add safe.directory '*'
 git diff-tree --no-commit-id --name-only -r ${GITHUB_SHA} > changed_files.txt
 
 # Upload changed and new files via SFTP
-lftp -c "set ftp:ssl-allow no; open -u $SFTP_USER -e 'mirror -R --delete --only-newer --exclude-glob .git/ --exclude-glob .github/ --exclude-glob *.sh -P1 --parallel=10 -x changed_files.txt $REMOTE_PATH' $SFTP_HOST"
+lftp -c "set ftp:ssl-allow no; open -u $SFTP_USER,placeholder -e 'mirror -R --delete --only-newer --exclude-glob .git/ --exclude-glob .github/ --exclude-glob *.sh -P1 --parallel=10 -x changed_files.txt $REMOTE_PATH' $SFTP_HOST"
 
 # Clean up
 rm changed_files.txt
