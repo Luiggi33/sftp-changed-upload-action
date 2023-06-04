@@ -18,3 +18,8 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  args:
+    - ${{ inputs.sftp-host }}
+    - ${{ inputs.sftp-user }}
+    - ${{ inputs.ssh-private-key }}
+    - ${{ inputs.remote-path }}
