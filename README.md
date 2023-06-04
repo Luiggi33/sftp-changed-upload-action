@@ -29,3 +29,4 @@ jobs:
         sftp-user: ${{ secrets.SFTP_USER }}
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
         remote-path: path/on/remote/server
+```
