@@ -5,6 +5,10 @@ inputs:
   sftp-host:
     description: 'The SFTP host'
     required: true
+  sftp-port:
+    description: 'The SFTP port'
+    required: true
+    default: 22
   sftp-user:
     description: 'The SFTP username'
     required: true
@@ -20,6 +24,7 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.sftp-host }}
+    - ${{ inputs.sftp-port }}
     - ${{ inputs.sftp-user }}
     - ${{ inputs.ssh-private-key }}
     - ${{ inputs.remote-path }}

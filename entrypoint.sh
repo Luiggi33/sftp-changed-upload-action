@@ -2,9 +2,10 @@
 
 # Set variables
 SFTP_HOST="$1"
-SFTP_USER="$2"
-SSH_PRIVATE_KEY="$3"
-REMOTE_PATH="$4"
+SFTP_PORT="$2"
+SFTP_USER="$3"
+SSH_PRIVATE_KEY="$4"
+REMOTE_PATH="$5"
 
 # Create SSH directory and set permissions
 mkdir -p ~/.ssh
@@ -24,7 +25,7 @@ git config --global --add safe.directory '*'
 git diff-tree --no-commit-id --name-only -r $GITHUB_SHA > changed_files.txt
 
 # Upload changed and new files via SFTP
-lftp -d -c "set ftp:ssl-allow no; open -u $SFTP_USER,placeholder -e 'cd $REMOTE_PATH; mirror -R --delete --only-newer --exclude-glob .git/ --exclude-glob .github/ -P1 --parallel=10 -x changed_files.txt .' $SFTP_HOST"
+lftp -d -c "set ftp:ssl-allow no; open -u $SFTP_USER,placeholder -p $SFTP_PORT -e 'cd $REMOTE_PATH; mirror -R --delete --only-newer --exclude-glob .git/ --exclude-glob .github/ -P1 --parallel=10 -x changed_files.txt .' $SFTP_HOST"
 
 # Clean up
 rm changed_files.txt

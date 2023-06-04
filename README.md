@@ -29,6 +29,7 @@ jobs:
       uses: luiggi33/sftp-upload-action@v1
       with:
         sftp-host: ${{ secrets.SFTP_HOST }}
+        sftp-port: 22
         sftp-user: ${{ secrets.SFTP_USER }}
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
         remote-path: path/on/remote/server
