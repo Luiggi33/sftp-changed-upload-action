@@ -17,6 +17,9 @@ chmod 600 ~/.ssh/id_rsa
 # Set strict SSH key checking
 echo "StrictHostKeyChecking no" > ~/.ssh/config
 
+# add all files to the safe directory
+git config --global --add safe.directory '*'
+
 # Get the list of changed and new files
 git diff-tree --no-commit-id --name-only -r ${GITHUB_SHA} > changed_files.txt
 
