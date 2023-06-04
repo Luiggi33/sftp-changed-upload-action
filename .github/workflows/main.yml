@@ -1,0 +1,22 @@
+name: SFTP Upload
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check Out Code
+      uses: actions/checkout@v2
+
+    - name: SFTP Upload
+      uses: Luiggi33/sftp-upload-action@v1
+      with:
+        sftp-host: ${{ secrets.SFTP_HOST }}
+        sftp-user: ${{ secrets.SFTP_USER }}
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        remote-path: ./test
