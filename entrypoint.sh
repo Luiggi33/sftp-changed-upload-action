@@ -18,7 +18,7 @@ chmod 600 ~/.ssh/id_rsa
 echo "StrictHostKeyChecking no" > ~/.ssh/config
 
 # Get the list of changed and new files
-git diff-tree --no-commit-id --name-only -r ${{ env.GITHUB_SHA }} > changed_files.txt
+git diff-tree --no-commit-id --name-only -r ${{ GITHUB_SHA }} > changed_files.txt
 
 # Upload changed and new files via SFTP
 lftp -c "set ftp:ssl-allow no; open -u $SFTP_USER -e 'mirror -R --delete --only-newer --exclude-glob .git/ --exclude-glob .github/ --exclude-glob *.sh -P1 --parallel=10 -x changed_files.txt $REMOTE_PATH' $SFTP_HOST"
