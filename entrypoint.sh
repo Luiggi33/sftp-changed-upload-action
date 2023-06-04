@@ -23,10 +23,8 @@ git config --global --add safe.directory '*'
 # Get the list of changed and new files
 git diff-tree --no-commit-id --name-only -r $GITHUB_SHA > changed_files.txt
 
-echo "Uploading changed and new files to path $REMOTE_PATH"
-
 # Upload changed and new files via SFTP
-lftp -d -c "set ftp:ssl-allow no; open -u $SFTP_USER,placeholder -e 'mirror -R --delete --only-newer --exclude-glob .git/ --exclude-glob .github/ -P1 --parallel=10 -x changed_files.txt $REMOTE_PATH' $SFTP_HOST"
+lftp -d -c "set ftp:ssl-allow no; open -u $SFTP_USER,placeholder -e 'cd $REMOTE_PATH; mirror -R --delete --only-newer --exclude-glob .git/ --exclude-glob .github/ -P1 --parallel=10 -x changed_files.txt .' $SFTP_HOST"
 
 # Clean up
 rm changed_files.txt
