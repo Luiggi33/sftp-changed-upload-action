@@ -1,0 +1,20 @@
+﻿name: Docker Action
+description: Run Docker container for SFTP upload
+
+inputs:
+  sftp-host:
+    description: 'The SFTP host'
+    required: true
+  sftp-user:
+    description: 'The SFTP username'
+    required: true
+  ssh-private-key:
+    description: 'The SSH private key for authentication'
+    required: true
+  remote-path:
+    description: 'The path on the remote server'
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
