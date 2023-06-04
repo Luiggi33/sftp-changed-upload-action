@@ -19,4 +19,4 @@ jobs:
         sftp-host: ${{ secrets.SFTP_HOST }}
         sftp-user: ${{ secrets.SFTP_USER }}
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        remote-path: '~/test'
+        remote-path: './test'
