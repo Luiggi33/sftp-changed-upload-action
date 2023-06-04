@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Set variables
 SFTP_HOST="$1"
