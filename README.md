@@ -2,8 +2,9 @@
 
 This GitHub Action allows you to automate the upload of changed and new files to an SFTP server using lftp.
 
-## Heavy WIP
-This is still in the workings, this won't work in the current state, but I am hopeful that it will in the future
+## Current Status
+
+This repository is currently in the working, you should not use it in the current state. Everything before v2 will probably be broken.
 
 ## Usage
 
