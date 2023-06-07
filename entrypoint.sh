@@ -46,10 +46,8 @@ echo "StrictHostKeyChecking no" > ~/.ssh/config
 # add all files to the safe directory
 git config --global --add safe.directory '*'
 
-echo "Current SHA: $GITHUB_SHA"
-
 # Get the list of changed and new files
-git diff --name-only "$GITHUB_SHA" HEAD > changed_files.txt
+git diff --name-only --diff-filter=ACMRT $GITHUB_SHA~1 $GITHUB_SHA > changed_files.txt
 
 if [ ! -s changed_files.txt ]; then
     echo "No files to upload."
