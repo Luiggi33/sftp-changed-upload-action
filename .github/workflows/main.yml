@@ -20,4 +20,4 @@ jobs:
         sftp-port: 22
         sftp-user: ${{ secrets.SFTP_USER }}
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        remote-path: './test'
+        remote-path: /home/luiggi/test/
