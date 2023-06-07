@@ -16,7 +16,7 @@ jobs:
         fetch-depth: '0'
 
     - name: SFTP Upload
-      uses: Luiggi33/sftp-changed-upload-action@v1.1.6
+      uses: Luiggi33/sftp-changed-upload-action@v1.1.7
       with:
         sftp-host: ${{ secrets.SFTP_HOST }}
         sftp-port: 22
