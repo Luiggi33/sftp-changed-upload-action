@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Check Out Code
       uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
 
     - name: SFTP Upload
       uses: Luiggi33/sftp-changed-upload-action@v1.1.6
