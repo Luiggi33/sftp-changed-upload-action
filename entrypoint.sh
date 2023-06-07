@@ -46,6 +46,9 @@ echo "StrictHostKeyChecking no" > ~/.ssh/config
 # add all files to the safe directory
 git config --global --add safe.directory '*'
 
+echo $(git show $GITHUB_SHA~1)
+echo $(git show $GITHUB_SHA)
+
 # Get the list of changed and new files
 git diff --name-only --diff-filter=ACMRT $GITHUB_SHA~1 $GITHUB_SHA > changed_files.txt
 
