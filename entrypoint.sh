@@ -57,7 +57,7 @@ fi
 
 # Upload changed and new files via SFTP
 #lftp -d -c "set ftp:ssl-allow no; open -u $SFTP_USER,placeholder -p $SFTP_PORT -e 'cd $REMOTE_PATH; mirror -R --delete --only-newer --exclude-glob .git/ --exclude-glob .github/ -P1 --parallel=10 -x changed_files.txt .' $SFTP_HOST"
-lftp -d -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set net:timeout 10; open -u $SFTP_USER,placeholder -p $SFTP_PORT -e 'set xfer:parallel-max 10; set mirror:use-pget-n 10; cd $REMOTE_PATH; mirror -R --delete --only-newer --exclude .git/ --exclude .github/ -P1 --parallel=10 -x changed_files.txt .' sftp://$SFTP_HOST"
+lftp -d -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; set net:timeout 10; open -u $SFTP_USER,placeholder -p $SFTP_PORT -e 'set mirror:use-pget-n 10; cd $REMOTE_PATH; mirror -R --delete --only-newer --exclude .git/ --exclude .github/ -P1 --parallel=10 -x changed_files.txt .' sftp://$SFTP_HOST"
 
 # Clean up
 rm changed_files.txt
