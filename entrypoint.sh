@@ -40,8 +40,8 @@ chmod 700 ~/.ssh
 echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
 
-# Set strict SSH key checking
-echo "StrictHostKeyChecking no" > ~/.ssh/config
+# Disable strict host key checking
+echo -e "Host $SFTP_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 chmod 600 ~/.ssh/config
 
 # add all files to the safe directory
@@ -57,7 +57,7 @@ if [ ! -s changed_files.txt ]; then
 fi
 
 # Upload changed and new files via SFTP
-lftp -d -c "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; set net:timeout 10; open -u $SFTP_USER,placeholder -p $SFTP_PORT -e 'set mirror:use-pget-n 10; cd $REMOTE_PATH; mirror -R --delete --only-newer --exclude .git/ --exclude .github/ -P1 --parallel=10 -x changed_files.txt .' sftp://$SFTP_HOST"
+lftp -d -c "set sftp:auto-confirm yes; set net:timeout 10; open -u $SFTP_USER, -p $SFTP_PORT -e 'set mirror:use-pget-n 10; cd $REMOTE_PATH; mirror -R --delete --only-newer --exclude .git/ --exclude .github/ -P1 --parallel=10 -x changed_files.txt .' sftp://$SFTP_HOST"
 
 # Clean up
 rm changed_files.txt
