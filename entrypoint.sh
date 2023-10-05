@@ -44,6 +44,9 @@ chmod 600 ~/.ssh/id_rsa
 echo -e "Host $SFTP_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 chmod 600 ~/.ssh/config
 
+ssh-keyscan -t ed25519 $SFTP_HOST >> ~/.ssh/known_hosts
+chmod 600 ~/.ssh/known_hosts
+
 # add all files to the safe directory
 git config --global --add safe.directory '*'
 
