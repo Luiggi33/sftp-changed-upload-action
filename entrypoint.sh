@@ -40,10 +40,6 @@ chmod 700 ~/.ssh
 echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
 
-# Disable strict host key checking
-echo -e "Host $SFTP_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-chmod 600 ~/.ssh/config
-
 # add all files to the safe directory
 git config --global --add safe.directory '*'
 
