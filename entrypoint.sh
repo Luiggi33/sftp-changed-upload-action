@@ -57,7 +57,7 @@ if [ ! -s changed_files.txt ]; then
 fi
 
 # Upload changed and new files via SFTP
-lftp -d -e "set sftp:auto-confirm yes; set net:timeout 10; open -u $SFTP_USER, -p $SFTP_PORT -e 'set mirror:use-pget-n 10; cd $REMOTE_PATH; mirror -R --delete --only-newer --exclude .git/ --exclude .github/ -P1 --parallel=10 -x changed_files.txt .' sftp://$SFTP_HOST"
+lftp -d -c "set sftp:auto-confirm yes; set net:timeout 10; open -u $SFTP_USER, -p $SFTP_PORT -e 'set mirror:use-pget-n 10; cd $REMOTE_PATH; mirror -R --delete --only-newer --exclude .git/ --exclude .github/ -P1 --parallel=10 -x changed_files.txt .' sftp://$SFTP_HOST"
 
 # Clean up
 rm changed_files.txt
