@@ -44,7 +44,7 @@ chmod 600 ~/.ssh/id_rsa
 echo -e "Host $SFTP_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 chmod 600 ~/.ssh/config
 
-ssh-keyscan -t rsa $SFTP_HOST >> ~/.ssh/known_hosts
+ssh-keyscan "$SFTP_HOST" >> $HOME/.ssh/known_hosts
 chmod 600 ~/.ssh/known_hosts
 
 # add all files to the safe directory
