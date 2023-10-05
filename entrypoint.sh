@@ -44,9 +44,6 @@ chmod 600 ~/.ssh/id_rsa
 echo -e "Host $SFTP_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 chmod 600 ~/.ssh/config
 
-ssh-keyscan "$SFTP_HOST" >> $HOME/.ssh/known_hosts
-chmod 600 ~/.ssh/known_hosts
-
 # add all files to the safe directory
 git config --global --add safe.directory '*'
 
@@ -60,7 +57,7 @@ if [ ! -s changed_files.txt ]; then
 fi
 
 # Upload changed and new files via SFTP
-lftp -d -c "set sftp:auto-confirm yes; set net:timeout 10; open -u $SFTP_USER, -p $SFTP_PORT -e 'set mirror:use-pget-n 10; cd $REMOTE_PATH; mirror -R --delete --only-newer --exclude .git/ --exclude .github/ -P1 --parallel=10 -x changed_files.txt .' sftp://$SFTP_HOST"
+lftp -d -e "set sftp:auto-confirm yes; set net:timeout 10; open -u $SFTP_USER, -p $SFTP_PORT -e 'set mirror:use-pget-n 10; cd $REMOTE_PATH; mirror -R --delete --only-newer --exclude .git/ --exclude .github/ -P1 --parallel=10 -x changed_files.txt .' sftp://$SFTP_HOST"
 
 # Clean up
 rm changed_files.txt
